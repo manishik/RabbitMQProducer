@@ -26,7 +26,7 @@ public class RabbitMQWebController {
 		employee.setSalary(salary);
 		rabbitMQSender.send(employee);
 
-		return "Message sent to the RabbitMQ Manish Successfully";
+		return "Message sent to the RabbitMQ Successfully with Employee Name " + empName;
 	}
 
 }

@@ -21,6 +21,11 @@ public class RabbitMQConfig {
 		return new DirectExchange("deadLetterExchange");
 	}
 
+    @Bean
+    DirectExchange exchange() {
+        return new DirectExchange("manish-direct-exchange");
+    }
+
 	@Bean
 	Queue dlq() {
 		return QueueBuilder.durable("deadLetterQueue").build();
@@ -30,11 +35,6 @@ public class RabbitMQConfig {
 	Queue queue() {
 		return QueueBuilder.durable("manish.queue").withArgument("x-dead-letter-exchange", "deadLetterExchange")
 				.withArgument("x-dead-letter-routing-key", "deadLetter").build();
-	}
-
-	@Bean
-	DirectExchange exchange() {
-		return new DirectExchange("manish-direct-exchange");
 	}
 
 	@Bean
@@ -52,9 +52,9 @@ public class RabbitMQConfig {
 		return new Jackson2JsonMessageConverter();
 	}
 
-	public AmqpTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+	/*public AmqpTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
 		final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
 		rabbitTemplate.setMessageConverter(jsonMessageConverter());
 		return rabbitTemplate;
-	}
+	}*/
 }
